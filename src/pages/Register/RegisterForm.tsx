@@ -7,14 +7,29 @@ interface RegisterFormValue {
   username: string;
 }
 
+// const fetcher = (url: string) => fetch(url).then((res) => res.json);
+
 const RegisterForm = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<RegisterFormValue>();
-  const onSubmit: SubmitHandler<RegisterFormValue> = (data) =>
-    console.log(data);
+  const onSubmit: SubmitHandler<RegisterFormValue> = (
+    data: RegisterFormValue,
+  ) => {
+    fetch(`${process.env.REACT_APP_BASE_URL}/api/auth/register`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((error) => console.log(error));
+  };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
