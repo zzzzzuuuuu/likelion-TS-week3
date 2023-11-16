@@ -7,8 +7,6 @@ interface RegisterFormValue {
   username: string;
 }
 
-// const fetcher = (url: string) => fetch(url).then((res) => res.json);
-
 const RegisterForm = () => {
   const {
     register,

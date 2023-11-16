@@ -1,5 +1,3 @@
-// export {};
-
 import React from 'react';
 import useSWR from 'swr';
 
@@ -27,17 +25,14 @@ const Users = () => {
   }
   return (
     <div>
-      {
-        data &&
-          data.data.users.map((user: User, index: number) => (
-            <div key={index}>
-              <span>{user.email}</span>
-              <span>{user.password}</span>
-              <span>{user.username}</span>
-            </div>
-          ))
-        // <p>ㅎㅇ</p>
-      }
+      {data &&
+        data.data.users.map((user: User, index: number) => (
+          <div key={index}>
+            <span>{user.email}</span>
+            <span>{user.password}</span>
+            <span>{user.username}</span>
+          </div>
+        ))}
     </div>
   );
 };

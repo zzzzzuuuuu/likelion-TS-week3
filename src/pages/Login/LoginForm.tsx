@@ -1,6 +1,5 @@
 import React from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import useSWR from 'swr';
 
 interface LoginFormValue {
   email: string;
