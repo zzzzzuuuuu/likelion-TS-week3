@@ -1,18 +1,20 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 import Login from './pages/Login/Login';
 import Register from './pages/Register/Register';
 import Users from './pages/Users';
+import { Route, Routes } from 'react-router-dom';
+import Header from './components/Header';
 
 function App() {
   return (
     <>
-      <Users />
-      <p> ---- </p>
-      <Login />
-      <p> ---- </p>
-      <Register />
+      <Header />
+      <Routes>
+        <Route path="/" element={<Users />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+      </Routes>
     </>
   );
 }
