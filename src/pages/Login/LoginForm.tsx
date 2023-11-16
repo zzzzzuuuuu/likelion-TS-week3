@@ -1,5 +1,6 @@
 import React from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 
 interface LoginFormValue {
   email: string;
@@ -7,6 +8,7 @@ interface LoginFormValue {
 }
 
 const LoginForm = () => {
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -22,6 +24,7 @@ const LoginForm = () => {
     })
       .then((res) => {
         console.log(res);
+        navigate(`/`);
       })
       .catch((error) => {
         console.log(error);
