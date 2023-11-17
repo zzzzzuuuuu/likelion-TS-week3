@@ -2,7 +2,7 @@ import React from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 
-interface LoginFormValue {
+interface LoginFormValues {
   email: string;
   password: string;
 }
@@ -13,8 +13,8 @@ const LoginForm = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<LoginFormValue>();
-  const onSubmit: SubmitHandler<LoginFormValue> = (data: LoginFormValue) => {
+  } = useForm<LoginFormValues>();
+  const onSubmit: SubmitHandler<LoginFormValues> = (data: LoginFormValues) => {
     fetch(`${process.env.REACT_APP_BASE_URL}/api/auth/login`, {
       method: 'POST',
       headers: {
