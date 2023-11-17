@@ -1,13 +1,12 @@
 import React from 'react';
 import useSWR from 'swr';
+import { fetcher } from '../api/fetcher';
 
 interface User {
   email: string;
   password: string;
   username: string;
 }
-
-const fetcher = (url: string) => fetch(url).then((res) => res.json()); // 여기 중괄호로 묶으면 안됨 .. 진짜 왜지
 
 const Users = () => {
   const { data, error, isLoading } = useSWR(
