@@ -2,7 +2,7 @@ import React from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 
-interface RegisterFormValue {
+interface RegisterFormValues {
   email: string;
   password: string;
   username: string;
@@ -10,13 +10,15 @@ interface RegisterFormValue {
 
 const RegisterForm = () => {
   const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<RegisterFormValue>();
-  const onSubmit: SubmitHandler<RegisterFormValue> = (
-    data: RegisterFormValue,
+  } = useForm<RegisterFormValues>();
+
+  const onSubmit: SubmitHandler<RegisterFormValues> = (
+    data: RegisterFormValues,
   ) => {
     fetch(`${process.env.REACT_APP_BASE_URL}/api/auth/register`, {
       method: 'POST',
