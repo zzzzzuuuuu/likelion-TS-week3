@@ -17,23 +17,25 @@ const RegisterForm = () => {
     formState: { errors },
   } = useForm<RegisterFormValues>();
 
-  const onSubmit: SubmitHandler<RegisterFormValues> = (
+  const onSubmit: SubmitHandler<RegisterFormValues> = async (
     data: RegisterFormValues,
   ) => {
-    fetch(`${process.env.REACT_APP_BASE_URL}/api/auth/register`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
-    })
-      .then((res) => {
-        console.log(res);
-        navigate(`/login`);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    try {
+      const res = await fetch(
+        `${process.env.REACT_APP_BASE_URL}/api/auth/register`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data),
+        },
+      );
+      console.log(res);
+      navigate(`/login`);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (

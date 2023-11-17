@@ -9,27 +9,32 @@ interface LoginFormValues {
 
 const LoginForm = () => {
   const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<LoginFormValues>();
-  const onSubmit: SubmitHandler<LoginFormValues> = (data: LoginFormValues) => {
-    fetch(`${process.env.REACT_APP_BASE_URL}/api/auth/login`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
-    })
-      .then((res) => {
-        console.log(res);
-        navigate(`/`);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-    console.log(data);
+
+  const onSubmit: SubmitHandler<LoginFormValues> = async (
+    data: LoginFormValues,
+  ) => {
+    try {
+      const res = await fetch(
+        `${process.env.REACT_APP_BASE_URL}/api/auth/login`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data),
+        },
+      );
+      console.log(res);
+      navigate(`/`);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
