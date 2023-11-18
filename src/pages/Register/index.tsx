@@ -1,15 +1,29 @@
 import React from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
+import useSWRMutation from 'swr/mutation';
+import { postFetcher } from '../../api/fetcher';
 
-interface RegisterFormValues {
+export interface RegisterFormValues {
   email: string;
   password: string;
   username: string;
 }
 
-const RegisterForm = () => {
+const Index = () => {
   const navigate = useNavigate();
+
+  const { trigger } = useSWRMutation('/api/auth/register', postFetcher, {
+    onSuccess: async (res) => {
+      const resData = await res.json();
+      if (res.ok) {
+        alert(resData.data);
+        navigate(`/login`);
+      } else {
+        alert(resData.error);
+      }
+    },
+  });
 
   const {
     register,
@@ -17,25 +31,10 @@ const RegisterForm = () => {
     formState: { errors },
   } = useForm<RegisterFormValues>();
 
-  const onSubmit: SubmitHandler<RegisterFormValues> = async (
+  const onSubmit: SubmitHandler<RegisterFormValues> = (
     data: RegisterFormValues,
   ) => {
-    try {
-      const res = await fetch(
-        `${process.env.REACT_APP_BASE_URL}/api/auth/register`,
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(data),
-        },
-      );
-      console.log(res);
-      navigate(`/login`);
-    } catch (error) {
-      console.log(error);
-    }
+    trigger(data);
   };
 
   return (
@@ -54,4 +53,4 @@ const RegisterForm = () => {
   );
 };
 
-export default RegisterForm;
+export default Index;
