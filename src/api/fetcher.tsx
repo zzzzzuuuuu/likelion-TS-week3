@@ -12,7 +12,7 @@ export const postFetcher = async (url: string, { arg }: { arg: any }) => {
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify(arg.arg), // 서버한테 전달
+    body: JSON.stringify(arg), // 서버한테 전달
   });
   return res;
 };
