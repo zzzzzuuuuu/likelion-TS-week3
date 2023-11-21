@@ -10,11 +10,12 @@ export interface RegisterFormValues {
   username: string;
 }
 
-const Index = () => {
+const Register = () => {
   const navigate = useNavigate();
 
   const { trigger } = useSWRMutation('/api/auth/register', postFetcher, {
     onSuccess: async (res) => {
+      console.log(res);
       const resData = await res.json();
       if (res.ok) {
         alert(resData.data);
@@ -53,4 +54,4 @@ const Index = () => {
   );
 };
 
-export default Index;
+export default Register;
