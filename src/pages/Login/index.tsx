@@ -1,14 +1,29 @@
 import React from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
+import useSWRMutation from 'swr/mutation';
+import { postFetcher } from '../../api/fetcher';
 
-interface LoginFormValues {
+export interface LoginFormValues {
   email: string;
   password: string;
 }
 
-const LoginForm = () => {
+const Login = () => {
   const navigate = useNavigate();
+
+  const { trigger } = useSWRMutation('/api/auth/login', postFetcher, {
+    onSuccess: async (res) => {
+      console.log(res);
+      const resData = await res.json();
+      console.log(resData);
+      console.log(resData.data);
+      if (res.ok) {
+        alert(resData.data);
+        navigate(`/`);
+      } else alert(resData.error);
+    },
+  });
 
   const {
     register,
@@ -16,25 +31,9 @@ const LoginForm = () => {
     formState: { errors },
   } = useForm<LoginFormValues>();
 
-  const onSubmit: SubmitHandler<LoginFormValues> = async (
-    data: LoginFormValues,
-  ) => {
-    try {
-      const res = await fetch(
-        `${process.env.REACT_APP_BASE_URL}/api/auth/login`,
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(data),
-        },
-      );
-      console.log(res);
-      navigate(`/`);
-    } catch (error) {
-      console.log(error);
-    }
+  const onSubmit: SubmitHandler<LoginFormValues> = (data: LoginFormValues) => {
+    console.log(data);
+    trigger(data);
   };
 
   return (
@@ -50,4 +49,4 @@ const LoginForm = () => {
   );
 };
 
-export default LoginForm;
+export default Login;
