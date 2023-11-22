@@ -19,7 +19,7 @@ const typography = {
   body1: css`
     font-size: 16px;
     font-weight: 400;
-    line-height: 20;
+    line-height: 20px;
   `,
 };
 
