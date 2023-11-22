@@ -14,7 +14,7 @@ const typography = {
   title1: css`
     font-size: 20px;
     font-weight: 700;
-    line-height: 26;
+    line-height: 26px;
   `,
   body1: css`
     font-size: 16px;
