@@ -1,10 +1,13 @@
 import React from 'react';
 import useSWR from 'swr';
 import { fetcher } from '../api/fetcher';
+import styled from 'styled-components';
+import { ReactComponent as SunglassesLion } from '../ds/icons/BigLion.svg';
+import Card from '../ds/components/Card';
 
-interface User {
+export interface UserTypes {
   email: string;
-  password: string;
+  password?: string;
   username: string;
 }
 
@@ -23,17 +26,42 @@ const Users = () => {
     return <div>Loading...</div>;
   }
   return (
-    <div>
-      {data &&
-        data.data.users.map((user: User, index: number) => (
-          <div key={index}>
-            <span>{user.email}</span>
-            <span>{user.password}</span>
-            <span>{user.username}</span>
-          </div>
-        ))}
-    </div>
+    <Container>
+      <UserContainer>
+        <MainLion />
+        <UserInnerContainer>
+          {data &&
+            data.data.users.map((user: UserTypes, index: number) => (
+              <Card key={index} user={user} />
+            ))}
+        </UserInnerContainer>
+      </UserContainer>
+    </Container>
   );
 };
 
 export default Users;
+
+const Container = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+const UserContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  width: 1200px;
+`;
+
+const UserInnerContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 26px;
+  align-self: stretch;
+`;
+
+const MainLion = styled(SunglassesLion)`
+  padding: 60px 0;
+`;
