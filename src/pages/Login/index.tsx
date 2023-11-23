@@ -3,6 +3,9 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import useSWRMutation from 'swr/mutation';
 import { postFetcher } from '../../api/fetcher';
+import styled from 'styled-components';
+import Input from '../../ds/components/Input';
+import Button from '../../ds/components/Button';
 
 export interface LoginFormValues {
   email: string;
@@ -37,16 +40,46 @@ const Login = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <label>이메일</label>
-      <input type="email" {...register('email', { required: true })} />
-      {errors.email && <span>필수 입력 항목입니다.</span>}
-      <label>비밀번호</label>
-      <input type="password" {...register('password', { required: true })} />
-      {errors.password && <span>필수 입력 항목입니다.</span>}
-      <input type="submit" />
-    </form>
+    <Container>
+      <LoginContainer>
+        <LoginTitle>로그인</LoginTitle>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <Input>이메일</Input>
+          <Input>비밀번호</Input>
+          {/*  <label>이메일</label>*/}
+          {/*  <input type="email" {...register('email', { required: true })} />*/}
+          {/*  {errors.email && <span>필수 입력 항목입니다.</span>}*/}
+          {/*  <label>비밀번호</label>*/}
+          {/*  <input*/}
+          {/*    type="password"*/}
+          {/*    {...register('password', { required: true })}*/}
+          {/*  />*/}
+          {/*  {errors.password && <span>필수 입력 항목입니다.</span>}*/}
+          {/*  <input type="submit" />*/}
+        </form>
+        <Button>로그인</Button>
+      </LoginContainer>
+    </Container>
   );
 };
 
 export default Login;
+
+const Container = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+
+const LoginContainer = styled.div`
+  display: flex;
+  margin-top: 100px;
+  background-color: lightgreen;
+  width: 500px;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const LoginTitle = styled.p`
+  ${({ theme }) => theme.typography.title1};
+  padding-bottom: 70px;
+`;
