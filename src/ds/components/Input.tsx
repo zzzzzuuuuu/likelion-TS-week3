@@ -1,53 +1,40 @@
 import React, { PropsWithChildren } from 'react';
-import useSWRMutation from 'swr/mutation';
-import { postFetcher } from '../../api/fetcher';
-import { SubmitHandler, useForm } from 'react-hook-form';
-import { LoginFormValues } from '../../pages/Login';
-import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import Button from './Button';
+import { UseFormRegister, UseFormRegisterReturn } from 'react-hook-form';
+import { RegisterFormValues } from '../../pages/Register';
 
 interface InputProps {
   isActive?: boolean;
   isError?: boolean;
+  name: 'email' | 'password' | 'username';
+  type: string;
+  register: UseFormRegister<RegisterFormValues>;
+  required: boolean;
 }
 const Input = ({
   isActive = false,
   isError = false,
+  name,
+  type,
+  register,
+  required,
   children,
 }: PropsWithChildren<InputProps>) => {
   return (
     <>
       <LoginBox>
         <LoginText>{children}</LoginText>
-        <LoginInput $isActive={isActive} $isError={isError} />
+        <LoginInput
+          $isActive={isActive}
+          $isError={isError}
+          type={type}
+          {...register(name, { required })}
+        />
       </LoginBox>
-      {/*<form onSubmit={handleSubmit(onSubmit)}>*/}
-      {/*  <Container>*/}
-      {/*    <LoginBox>*/}
-      {/*      <LoginText>이메일</LoginText>*/}
-      {/*      <LoginInput*/}
-      {/*        type="email"*/}
-      {/*        {...register('email', { required: true })}*/}
-      {/*      />*/}
-      {/*      /!*{errors.email && <span>필수 입력 항목입니다.</span>}*!/*/}
-      {/*    </LoginBox>*/}
-      {/*    <LoginBox>*/}
-      {/*      <LoginText>비밀번호</LoginText>*/}
-      {/*      <LoginInput*/}
-      {/*        type="password"*/}
-      {/*        {...register('password', { required: true })}*/}
-      {/*      />*/}
-      {/*      /!*{errors.password && <span>필수 입력 항목입니다.</span>}*!/*/}
-      {/*      /!*<input type="submit" value="로그인" />*!/*/}
-      {/*    </LoginBox>*/}
-      {/*  </Container>*/}
-      {/*  <Button>로그인</Button>*/}
-      {/*</form>*/}
     </>
   );
 };
-
+Input.displayName = 'Input';
 export default Input;
 
 const Container = styled.div`

@@ -4,15 +4,17 @@ import styled from 'styled-components';
 interface ButtonProps {
   isActive?: boolean;
   type: string;
+  value: string;
 }
 const Button = ({
   isActive = false,
   children,
   type,
+  value,
 }: PropsWithChildren<ButtonProps>) => {
   return (
     <>
-      <ButtonStyle type={type} $isActive={isActive}>
+      <ButtonStyle type={type} value={value} $isActive={isActive}>
         {children}
       </ButtonStyle>
     </>

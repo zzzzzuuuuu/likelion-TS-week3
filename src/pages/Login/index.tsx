@@ -44,20 +44,14 @@ const Login = () => {
       <LoginContainer>
         <LoginTitle>로그인</LoginTitle>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <Input>이메일</Input>
-          <Input>비밀번호</Input>
-          {/*  <label>이메일</label>*/}
-          {/*  <input type="email" {...register('email', { required: true })} />*/}
-          {/*  {errors.email && <span>필수 입력 항목입니다.</span>}*/}
-          {/*  <label>비밀번호</label>*/}
-          {/*  <input*/}
-          {/*    type="password"*/}
-          {/*    {...register('password', { required: true })}*/}
-          {/*  />*/}
-          {/*  {errors.password && <span>필수 입력 항목입니다.</span>}*/}
-          <input type="submit" />
+          <Input type="email" name="email" register={register} required>
+            이메일
+          </Input>
+          <Input type="password" name="password" register={register} required>
+            비밀번호
+          </Input>
+          <Button type="submit" value="로그인" />
         </form>
-        {/*<Button>로그인</Button>*/}
       </LoginContainer>
     </Container>
   );

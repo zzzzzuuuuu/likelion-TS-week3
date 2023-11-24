@@ -10,7 +10,7 @@ import Button from '../../ds/components/Button';
 export interface RegisterFormValues {
   email: string;
   password: string;
-  username: string;
+  username?: string;
 }
 
 const Register = () => {
@@ -46,21 +46,17 @@ const Register = () => {
       <RegisterContainer>
         <RegisterTitle>회원가입</RegisterTitle>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <Input>이름</Input>
-          <Input>이메일</Input>
-          <Input>비밀번호</Input>
-          {/*<label>이메일</label>*/}
-          {/*<input type="email" {...register('email', { required: true })} />*/}
-          {/*{errors.email && <span>필수 입력 항목입니다.</span>}*/}
-          {/*<label>비밀번호</label>*/}
-          {/*<input type="password" {...register('password', { required: true })} />*/}
-          {/*{errors.password && <span>필수 입력 항목입니다.</span>}*/}
-          {/*<label>유저네임</label>*/}
-          {/*<input type="text" {...register('username', { required: true })} />*/}
-          {/*{errors.username && <span>필수 입력 항목입니다.</span>}*/}
-          <Button type="submit" />
+          <Input type="text" name="username" register={register} required>
+            이름
+          </Input>
+          <Input type="email" name="email" register={register} required>
+            이메일
+          </Input>
+          <Input type="password" name="password" register={register} required>
+            비밀번호
+          </Input>
+          <Button type="submit" value="회원가입" />
         </form>
-        {/*<Button>가입하기</Button>*/}
       </RegisterContainer>
     </Container>
   );
