@@ -55,9 +55,9 @@ const Login = () => {
           {/*    {...register('password', { required: true })}*/}
           {/*  />*/}
           {/*  {errors.password && <span>필수 입력 항목입니다.</span>}*/}
-          {/*  <input type="submit" />*/}
+          <input type="submit" />
         </form>
-        <Button>로그인</Button>
+        {/*<Button>로그인</Button>*/}
       </LoginContainer>
     </Container>
   );

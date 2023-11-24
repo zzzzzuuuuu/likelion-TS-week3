@@ -3,21 +3,25 @@ import styled from 'styled-components';
 
 interface ButtonProps {
   isActive?: boolean;
+  type: string;
 }
 const Button = ({
   isActive = false,
   children,
+  type,
 }: PropsWithChildren<ButtonProps>) => {
   return (
     <>
-      <ButtonStyle $isActive={isActive}>{children}</ButtonStyle>
+      <ButtonStyle type={type} $isActive={isActive}>
+        {children}
+      </ButtonStyle>
     </>
   );
 };
 
 export default Button;
 
-const ButtonStyle = styled.button<{ $isActive: boolean }>`
+const ButtonStyle = styled.input<{ $isActive: boolean }>`
   background: ${({ $isActive }) =>
     $isActive
       ? 'linear-gradient(93deg, #B1DE00 -3.88%, #1DE08E 103.41%)'

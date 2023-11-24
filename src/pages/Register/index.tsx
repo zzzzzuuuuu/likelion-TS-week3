@@ -21,10 +21,10 @@ const Register = () => {
       console.log(res);
       const resData = await res.json();
       if (res.ok) {
-        alert(resData.data);
+        alert(resData.data.message);
         navigate(`/login`);
       } else {
-        alert(resData.error);
+        alert(resData.error.message);
       }
     },
   });
@@ -58,9 +58,9 @@ const Register = () => {
           {/*<label>유저네임</label>*/}
           {/*<input type="text" {...register('username', { required: true })} />*/}
           {/*{errors.username && <span>필수 입력 항목입니다.</span>}*/}
-          {/*<input type="submit" />*/}
+          <Button type="submit" />
         </form>
-        <Button>가입하기</Button>
+        {/*<Button>가입하기</Button>*/}
       </RegisterContainer>
     </Container>
   );
