@@ -16,10 +16,12 @@ function App() {
     {
       id: 0,
       title: '로그인',
+      url: `/login`,
     },
     {
       id: 1,
       title: '회원가입',
+      url: `/register`,
     },
   ];
   return (

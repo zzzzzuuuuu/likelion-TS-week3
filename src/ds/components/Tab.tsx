@@ -3,11 +3,18 @@ import styled from 'styled-components';
 
 interface TabProps {
   isActive?: boolean; // 옵션으로 주는 대신 기본값 주기
+  onClickTab?: () => void;
 }
-const Tab = ({ isActive = false, children }: PropsWithChildren<TabProps>) => {
+const Tab = ({
+  isActive = false,
+  onClickTab,
+  children,
+}: PropsWithChildren<TabProps>) => {
   return (
     <>
-      <Button $isActive={isActive}>{children}</Button>
+      <Button $isActive={isActive} onClick={onClickTab}>
+        {children}
+      </Button>
     </>
   );
 };
